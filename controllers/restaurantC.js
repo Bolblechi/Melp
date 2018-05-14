@@ -66,7 +66,7 @@ exports.create = function(req, res)
     db.get().query("INSERT into Restaurants (id,rating,name,site,email,phone,street,city,state,lat,lng) VALUES ?",[[[req.body.id,req.body.rating,req.body.name,req.body.site,req.body.email,req.body.phone,req.body.street,req.body.city,req.body.state,req.body.lat,req.body.lng]]], function (errorR, resultR, fieldsR) 
     {
       if (errorR) throw errorR;
-      return console.log("Nuevo restaurant creado");
+      return return res.render(path.resolve()+'/views/paginaInicio.ejs',{abc:"Nuevo restaurant creado"};
     });
 };
 
@@ -99,11 +99,11 @@ exports.update = function(req,res)
       db.get().query(a,function(errorU,resultU,fieldsU)
       {
         if(errorU) throw errorU;
-        return console.log("Actualizado");
+        return res.render(path.resolve()+'/views/paginaInicio.ejs',{abc:"Actualizado"});
       });
     }
     else
-    {return console.log("Sin cambios")}
+    {return return res.render(path.resolve()+'/views/paginaInicio.ejs',{abc:"Sin cambios"});}
   });
 };
 
@@ -112,7 +112,7 @@ exports.delete = function(req,res)
     db.get().query("DELETE FROM Restaurants WHERE id=?",[[[req.params.id]]],function(errorD,resultD,fieldsD)
     {
         if (errorD) throw errorD;
-        return console.log("Borrado con éxito");
+        return return res.render(path.resolve()+'/views/paginaInicio.ejs',{abc:"Borrado con éxito"});
     });
 
 };
