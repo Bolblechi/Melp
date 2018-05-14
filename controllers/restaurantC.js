@@ -67,7 +67,7 @@ exports.create = function(req, res)
     {
       if (errorR) throw errorR;
       return console.log("Nuevo restaurant creado");
-    }
+    });
 };
 
 exports.update = function(req,res)
@@ -107,7 +107,7 @@ exports.update = function(req,res)
   });
 };
 
-exports.delete = function(req.res)
+exports.delete = function(req,res)
 {
     db.get().query("DELETE FROM Restaurants WHERE id=?",[[[req.params.id]]],function(errorD,resultD,fieldsD)
     {
