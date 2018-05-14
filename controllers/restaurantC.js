@@ -2,7 +2,7 @@ var path = require('path');
 var mysql = require('mysql')
 var math = require('mathjs');
 var db = mysql.createConnection(process.env.JAWSDB_URL);
-
+db.connect();
 
 exports.pagina_principal = function(req, res) 
 {
