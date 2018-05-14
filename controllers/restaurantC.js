@@ -62,7 +62,7 @@ exports.nearby = function(req, res)
 };
 
 exports.create = function(req, res) 
-{   console.log(req.body);
+{   
     db.get().query("INSERT into Restaurants (id,rating,name,site,email,phone,street,city,state,lat,lng) VALUES ?",[[[req.body.id,req.body.rating,req.body.name,req.body.site,req.body.email,req.body.phone,req.body.street,req.body.city,req.body.state,req.body.lat,req.body.lng]]], function (errorR, resultR, fieldsR) 
     {
       if (errorR) return res.render(path.resolve()+'/views/paginaInicio.ejs',{abc:errorR});
@@ -76,7 +76,7 @@ exports.update = function(req,res)
   {
     return new Promise(function(result,reject)
     {
-      if(Object.keys(req.body).length> 1)
+      if(Object.keys(req.body).length)
       {
         var query = "UPDATE Restaurants SET "
         for (var key in req.body) 
