@@ -10,7 +10,7 @@ var users = require('./routes/users');
 var db = require(path.resolve()+'/db');
 var app = express();
 
-db.connect(function(err) {
+db.get(function(err) {
   if (err) throw err;
   console.log("Connected!");
 });

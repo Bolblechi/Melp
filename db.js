@@ -4,12 +4,7 @@ var con
 
 exports.connect = function(done)
   {
-      con = mysql.createPool({
-      host: "localhost",
-      user: "Melp",
-      password: "password",
-      database: "melp"
-      })
+      con = mysql.createPool(process.env.JAWSDB_URL)
       done()
    }
 
