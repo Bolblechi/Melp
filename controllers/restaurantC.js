@@ -54,7 +54,7 @@ exports.nearby = function(req, res)
                             " ORDER BY distance"
     db.get().query(query,function(errorQ,resultQ,fieldsQ)
     {
-        if (errorQ) throw errorQ;
+        if (errorQ) return res.render(path.resolve()+'/views/paginaInicio.ejs',{abc:errorQ});
         forit(resultQ).
         then(function(a){mkJson(a).
         then(function(b){return res.render(path.resolve()+'/views/paginaInicio.ejs',{abc:b})})});
@@ -65,7 +65,7 @@ exports.create = function(req, res)
 {
     db.get().query("INSERT into Restaurants (id,rating,name,site,email,phone,street,city,state,lat,lng) VALUES ?",[[[req.body.id,req.body.rating,req.body.name,req.body.site,req.body.email,req.body.phone,req.body.street,req.body.city,req.body.state,req.body.lat,req.body.lng]]], function (errorR, resultR, fieldsR) 
     {
-      if (errorR) throw errorR;
+      if (errorR) return res.render(path.resolve()+'/views/paginaInicio.ejs',{abc:errorR});
       return res.render(path.resolve()+'/views/paginaInicio.ejs',{abc:"Nuevo restaurant creado"});
     });
 };
@@ -98,7 +98,7 @@ exports.update = function(req,res)
     {
       db.get().query(a,function(errorU,resultU,fieldsU)
       {
-        if(errorU) throw errorU;
+        if(errorU) return res.render(path.resolve()+'/views/paginaInicio.ejs',{abc:errorU});
         return res.render(path.resolve()+'/views/paginaInicio.ejs',{abc:"Actualizado"});
       });
     }
@@ -111,7 +111,7 @@ exports.delete = function(req,res)
 {
     db.get().query("DELETE FROM Restaurants WHERE id=?",[[[req.params.id]]],function(errorD,resultD,fieldsD)
     {
-        if (errorD) throw errorD;
+        if (errorD) return res.render(path.resolve()+'/views/paginaInicio.ejs',{abc:D});
         return res.render(path.resolve()+'/views/paginaInicio.ejs',{abc:"Borrado con éxito"});
     });
 
