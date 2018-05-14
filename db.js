@@ -1,10 +1,8 @@
 var mysql = require('mysql')
 
-var con
-
 exports.connect = function(done)
   {
-      con = mysql.createPool(process.env.JAWSDB_URL)
+      var con = mysql.createPool(process.env.JAWSDB_URL)
       done()
    }
 
