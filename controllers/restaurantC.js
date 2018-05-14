@@ -60,3 +60,59 @@ exports.nearby = function(req, res)
         then(function(b){return console.log(b)})});
     });
 };
+
+exports.create = function(req, res) 
+{
+    db.get().query("INSERT into Restaurants (id,rating,name,site,email,phone,street,city,state,lat,lng) VALUES ?",[[[req.body.id,req.body.rating,req.body.name,req.body.site,req.body.email,req.body.phone,req.body.street,req.body.city,req.body.state,req.body.lat,req.body.lng]]], function (errorR, resultR, fieldsR) 
+    {
+      if (errorR) throw errorR;
+      return console.log("Nuevo restaurant creado");
+    }
+};
+
+exports.update = function(req,res)
+{
+  function queryUpdate()
+  {
+    return new Promise(function(result,reject)
+    {
+      if(Object.keys(req.body).length> 1)
+      {
+        var query = "UPDATE Restaurants SET "
+        for (var key in req.body) 
+        {
+          query += key + " = " + "'" + req.body[key] + "',"
+        }
+        query = query.substring(0,query.length-1)
+        query += " WHERE id = " + "'" + req.params.id + "'";
+        return result(query);
+      }
+      else
+      {return result(null)}
+    })
+  }
+  queryUpdate().
+  then(function(a)
+  {
+    if(a)
+    {
+      db.get().query(a,function(errorU,resultU,fieldsU)
+      {
+        if(errorU) throw errorU;
+        return console.log("Actualizado");
+      });
+    }
+    else
+    {return console.log("Sin cambios")}
+  });
+};
+
+exports.delete = function(req.res)
+{
+    db.get().query("DELETE FROM Restaurants WHERE id=?",[[[req.params.id]]],function(errorD,resultD,fieldsD)
+    {
+        if (errorD) throw errorD;
+        return console.log("Borrado con éxito");
+    });
+
+};
