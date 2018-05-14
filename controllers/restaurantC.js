@@ -4,7 +4,7 @@ var math = require('mathjs');
 
 exports.pagina_principal = function(req, res) 
 {
-   return res.render(path.resolve()+'/views/paginaInicio.ejs',{abc:NULL})
+   return res.render(path.resolve()+'/views/paginaInicio.ejs',{abc:null})
 };
 
 
