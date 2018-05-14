@@ -57,7 +57,7 @@ exports.nearby = function(req, res)
         if (errorQ) throw errorQ;
         forit(resultQ).
         then(function(a){mkJson(a).
-        then(function(b){return console.log(b)})});
+        then(function(b){return b})});
     });
 };
 
