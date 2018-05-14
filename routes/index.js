@@ -1,9 +1,10 @@
 var express = require('express');
 var router = express.Router();
+var path = require('path');
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
-});
+var control = require(path.resolve()+'/controllers/restaurantC');
+
+router.get('/', control.pagina_principal);
+router.get('/restaurants/statistics?', control.nearby);
 
 module.exports = router;
