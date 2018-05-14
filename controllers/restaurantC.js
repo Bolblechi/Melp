@@ -1,6 +1,8 @@
 var path = require('path');
-var db = require(path.resolve()+'/db');
+var mysql = require('mysql')
 var math = require('mathjs');
+var db = mysql.createConnection(process.env.JAWSDB_URL);
+
 
 exports.pagina_principal = function(req, res) 
 {
@@ -52,7 +54,7 @@ exports.nearby = function(req, res)
                             ") )* sin( radians( lat ) ))) AS distance FROM Restaurants HAVING distance <=" +
                             req.query.radius +
                             " ORDER BY distance"
-    db.get().query(query,function(errorQ,resultQ,fieldsQ)
+    db.query(query,function(errorQ,resultQ,fieldsQ)
     {
         if (errorQ) throw errorQ;
         forit(resultQ).
@@ -63,7 +65,7 @@ exports.nearby = function(req, res)
 
 exports.create = function(req, res) 
 {
-    db.get().query("INSERT into Restaurants (id,rating,name,site,email,phone,street,city,state,lat,lng) VALUES ?",[[[req.body.id,req.body.rating,req.body.name,req.body.site,req.body.email,req.body.phone,req.body.street,req.body.city,req.body.state,req.body.lat,req.body.lng]]], function (errorR, resultR, fieldsR) 
+    db.query("INSERT into Restaurants (id,rating,name,site,email,phone,street,city,state,lat,lng) VALUES ?",[[[req.body.id,req.body.rating,req.body.name,req.body.site,req.body.email,req.body.phone,req.body.street,req.body.city,req.body.state,req.body.lat,req.body.lng]]], function (errorR, resultR, fieldsR) 
     {
       if (errorR) throw errorR;
       return console.log("Nuevo restaurant creado");
@@ -96,7 +98,7 @@ exports.update = function(req,res)
   {
     if(a)
     {
-      db.get().query(a,function(errorU,resultU,fieldsU)
+      db.query(a,function(errorU,resultU,fieldsU)
       {
         if(errorU) throw errorU;
         return console.log("Actualizado");
@@ -109,7 +111,7 @@ exports.update = function(req,res)
 
 exports.delete = function(req,res)
 {
-    db.get().query("DELETE FROM Restaurants WHERE id=?",[[[req.params.id]]],function(errorD,resultD,fieldsD)
+    db.query("DELETE FROM Restaurants WHERE id=?",[[[req.params.id]]],function(errorD,resultD,fieldsD)
     {
         if (errorD) throw errorD;
         return console.log("Borrado con éxito");
