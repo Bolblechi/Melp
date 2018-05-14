@@ -4,7 +4,7 @@ var math = require('mathjs');
 
 exports.pagina_principal = function(req, res) 
 {
-   return res.render(path.resolve()+'/views/paginaInicio.ejs')
+   return res.render(path.resolve()+'/views/paginaInicio.ejs',{abc:NULL})
 };
 
 
@@ -57,7 +57,7 @@ exports.nearby = function(req, res)
         if (errorQ) throw errorQ;
         forit(resultQ).
         then(function(a){mkJson(a).
-        then(function(b){return b})});
+        then(function(b){return res.render(path.resolve()+'/views/paginaInicio.ejs',{abc:b})})});
     });
 };
 
